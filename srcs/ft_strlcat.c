@@ -18,10 +18,7 @@ static size_t	ft_strnlen(const char *s, size_t maxlen)
 
 	h = s;
 	while (maxlen && *s)
-	{
-		maxlen--;
-		s++;
-	}
+		(maxlen--, s++);
 	return (s - h);
 }
 
@@ -41,6 +38,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	return (dst_len + src_len);
 }
 
+/*
 #include <bsd/string.h>
 #include <stdio.h>
 
@@ -59,4 +57,4 @@ int	main(void)
 	printf("%s\n", dst);
 	printf("%s\n", dst1);
 	return (0);
-}
+}*/
