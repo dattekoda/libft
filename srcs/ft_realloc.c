@@ -1,13 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: khanadat <khanadat@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-05-28 07:04:04 by khanadat          #+#    #+#             */
+/*   Updated: 2025-05-28 07:04:04 by khanadat         ###   ########.jp       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/libft.h"
 
 static void	*ft_realloc(void *ptr, size_t old_sz, size_t new_sz)
 {
-	void *newp; 
+	void	*newp;
 
 	if (new_sz == 0)
-	{
-		free(ptr);
-		return (NULL);
-	}
+		return (free(ptr), NULL);
 	if (!ptr)
 		return (malloc(new_sz));
 	newp = malloc(new_sz);

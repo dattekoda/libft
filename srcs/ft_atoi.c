@@ -10,46 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-static int	ft_isspace(int c)
-{
-	if (c == ' '
-		|| ('\t' <= c && c <= '\r'))
-		return (8192);
-	return (0);
-}
+#include "../includes/libft.h"
 
 int	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	result;
+	int	num;
 	int	sign;
 
-	i = 0;
+	num = 0;
 	sign = 1;
-	while (ft_isspace(nptr[i]))
-		i++;
-	if (nptr[i] == '-')
-		sign = -1;
-	if (nptr[i] == '+' || nptr[i] == '-')
-		i++;
-	result = 0;
-	while (nptr[i] && '0' <= nptr[i]
-		&& nptr[i] <= '9')
-		result = 10 * result + (nptr[i++] - '0');
-	return (result * sign);
+	while (*nptr == ' ' || ('\t' <= *nptr && *nptr <= '\r'))
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+		sign = (nptr++, -1 + 2 * (*nptr == '+'));
+	while (*nptr && ft_isdigit(*nptr))
+		num = num * 10 + (*(nptr++) - '0');
+	return (sign * num);
 }
 
-/*
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-int	main(int argc, char* argv[])
-{
-	if (argc == 1) return 0;
-	printf("original: %s\n", argv[1]);
-	printf("atoi:     %d\n", atoi(argv[1]));
-	printf("ft_atoi:  %d\n", ft_atoi(argv[1]));
-	return 0;
-}*/
+// int	main(int argc, char* argv[])
+// {
+// 	if (argc == 1) return 0;
+// 	printf("original: %s\n", argv[1]);
+// 	printf("atoi:     %d\n", atoi(argv[1]));
+// 	printf("ft_atoi:  %d\n", ft_atoi(argv[1]));
+// 	return 0;
+// }
