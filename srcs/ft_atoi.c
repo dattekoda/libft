@@ -22,7 +22,7 @@ int	ft_atoi(const char *nptr)
 	while (*nptr == ' ' || ('\t' <= *nptr && *nptr <= '\r'))
 		nptr++;
 	if (*nptr == '+' || *nptr == '-')
-		sign = (nptr++, -1 + 2 * (*nptr == '+'));
+		sign = -1 + 2 * (*(nptr++) == '+');
 	while (*nptr && ft_isdigit(*nptr))
 		num = num * 10 + (*(nptr++) - '0');
 	return (sign * num);
@@ -34,8 +34,8 @@ int	ft_atoi(const char *nptr)
 // int	main(int argc, char* argv[])
 // {
 // 	if (argc == 1) return 0;
-// 	printf("original: %s\n", argv[1]);
-// 	printf("atoi:     %d\n", atoi(argv[1]));
-// 	printf("ft_atoi:  %d\n", ft_atoi(argv[1]));
+// 	printf("original: |%s|\n", argv[1]);
+// 	printf("atoi:     |%d|\n", atoi(argv[1]));
+// 	printf("ft_atoi:  |%d|\n", ft_atoi(argv[1]));
 // 	return 0;
 // }
