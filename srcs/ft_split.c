@@ -19,17 +19,13 @@ static int	count(char const *s, char c)
 	output = 0;
 	while (*s)
 	{
-		if (*s == c)
-		{
-			while (*s && *s == c)
-				s++;
-		}
-		else
-		{
-			while (*s && *s != c)
-				s++;
-			output++;
-		}
+		while (*s && *s == c)
+			s++;
+		if(!*s)
+			break ;
+		output++;
+		while (*s && *s != c)
+			s++;
 	}
 	return (output);
 }
@@ -41,21 +37,18 @@ static void	measure_sizes(char const *s, char c, int *res_sizes)
 	i = 0;
 	while (*s)
 	{
-		if (*s == c)
+		while (*s && *s == c)
+			s++;
+		if (!*s)
+			break ;
+		res_sizes[i] = 0;
+		while (*s && *s != c)
 		{
-			while (*s && *s == c)
-				s++;
+			res_sizes[i]++;
+			s++;
 		}
-		else
-		{
-			res_sizes[i] = 0;
-			while (*s && *s != c)
-			{
-				res_sizes[i]++;
-				s++;
-			}
-			i++;
-		}
+		i++;
+		
 	}
 }
 
@@ -130,7 +123,7 @@ char	**ft_split(char const *s, char c)
 	return (res);
 }
 
-/*
+
 #include <stdio.h>
 
 int main(int argc, char* argv[])
@@ -148,4 +141,4 @@ int main(int argc, char* argv[])
 	while (words[i])
 		printf("%s\n", words[i++]);
 	return (0);
-}*/
+}
