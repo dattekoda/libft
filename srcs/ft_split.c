@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khanadat <khanadat@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*   By: khanadat <khanadat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-27 08:57:38 by khanadat          #+#    #+#             */
-/*   Updated: 2025-04-27 08:57:38 by khanadat         ###   ########.jp       */
+/*   Created: 2025/04/27 08:57:38 by khanadat          #+#    #+#             */
+/*   Updated: 2025/06/17 23:22:03 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,21 +124,21 @@ char	**ft_split(char const *s, char c)
 }
 
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int main(int argc, char* argv[])
-{
-	char	**words;
-	if (argc < 3)
-	{
-		words = ft_split(" fjfkdasjfd  f dasjfkda lfd adfl a", ' ');
-	}
-	else
-	{
-		words = ft_split(argv[1], argv[2][0]);
-	}
-	int		i = 0;
-	while (words[i])
-		printf("%s\n", words[i++]);
-	return (0);
-}
+// int main(int argc, char* argv[])
+// {
+// 	char	**words;
+// 	if (argc < 3)
+// 	{
+// 		words = ft_split(" fjfkdasjfd  f dasjfkda lfd adfl a", ' ');
+// 	}
+// 	else
+// 	{
+// 		words = ft_split(argv[1], argv[2][0]);
+// 	}
+// 	int		i = 0;
+// 	while (words[i])
+// 		printf("%s\n", words[i++]);
+// 	return (0);
+// }
