@@ -26,7 +26,7 @@ bonus/ft_lstlast_bonus.c bonus/ft_lstadd_back_bonus.c bonus/ft_lstdelone_bonus.c
 bonus/ft_lstclear_bonus.c bonus/ft_lstiter_bonus.c bonus/ft_lstmap_bonus.c
 
 OBJ			:= $(SRC:.c=.o)
-OBJ_BONUS	:= $(SRC:.c=.o)
+OBJ_BONUS	:= $(BONUS:.c=.o)
 OBJ_ALL		:= $(OBJ)
 
 .PHONY: all bonus clean fclean re
