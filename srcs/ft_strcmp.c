@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khanadat <khanadat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 12:26:12 by khanadat          #+#    #+#             */
-/*   Updated: 2025/06/21 04:21:15 by khanadat         ###   ########.fr       */
+/*   Created: 2025/06/21 04:19:21 by khanadat          #+#    #+#             */
+/*   Updated: 2025/06/21 04:20:16 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (n-- == 0)
-		return (0);
-	while (n-- && *s1 && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-	return ((unsigned char) *s1 - (unsigned char) *s2);
+	return (ft_strncmp(s1, s2, INT_MAX));
 }

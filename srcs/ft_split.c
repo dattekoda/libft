@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:57:38 by khanadat          #+#    #+#             */
-/*   Updated: 2025/06/18 20:13:29 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/06/21 04:18:11 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,18 +167,18 @@ char	**ft_split(const char *s, char c)
 // 	return (res);
 // }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int main(int argc, char* argv[])
-{
-	char	**words;
-	int		i = 0;
+// int main(int argc, char* argv[])
+// {
+// 	char	**words;
+// 	int		i = 0;
 
-	if (argc == 1)
-		words = ft_split(" fjfkdasjfd  f dasjfkda lfd adfl a", ' ');
-	else
-		words = ft_split(argv[1], argv[2][0]);
-	while (words[i])
-		printf("%s\n", words[i++]);
-	return (0);
-}
+// 	if (argc == 1)
+// 		words = ft_split(" fjfkdasjfd  f dasjfkda lfd adfl a", ' ');
+// 	else
+// 		words = ft_split(argv[1], argv[2][0]);
+// 	while (words[i])
+// 		printf("%s\n", words[i++]);
+// 	return (0);
+// }
