@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khanadat <khanadat@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*   By: khanadat <khanadat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-27 12:39:44 by khanadat          #+#    #+#             */
-/*   Updated: 2025-04-27 12:39:44 by khanadat         ###   ########.jp       */
+/*   Created: 2025/04/27 12:39:44 by khanadat          #+#    #+#             */
+/*   Updated: 2025/06/22 05:19:57 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	int		i;
 	char	*res;
 
-	if (!s || !f)
-		return (NULL);
 	len = ft_strlen(s);
 	res = malloc(len + 1);
 	if (!res)

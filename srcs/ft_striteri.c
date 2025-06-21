@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khanadat <khanadat@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*   By: khanadat <khanadat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-27 13:30:17 by khanadat          #+#    #+#             */
-/*   Updated: 2025-04-27 13:30:17 by khanadat         ###   ########.jp       */
+/*   Created: 2025/04/27 13:30:17 by khanadat          #+#    #+#             */
+/*   Updated: 2025/06/22 05:19:12 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	unsigned int	i;
 
-	if (!s || !f)
-		return ;
 	i = 0;
 	while (s[i])
 	{

@@ -29,7 +29,7 @@ OBJ			:= $(SRC:.c=.o)
 OBJ_BONUS	:= $(BONUS:.c=.o)
 OBJ_ALL		:= $(OBJ)
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
 
 all: $(NAME)
 

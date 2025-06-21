@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khanadat <khanadat@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*   By: khanadat <khanadat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-28 05:06:22 by khanadat          #+#    #+#             */
-/*   Updated: 2025-04-28 05:06:22 by khanadat         ###   ########.jp       */
+/*   Created: 2025/04/28 05:06:22 by khanadat          #+#    #+#             */
+/*   Updated: 2025/06/22 05:18:47 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (!s)
-		return ;
 	while (*s)
 		ft_putchar_fd(*s++, fd);
 }
