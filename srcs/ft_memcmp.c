@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khanadat <khanadat@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-26 04:57:31 by khanadat          #+#    #+#             */
-/*   Updated: 2025-04-26 04:57:31 by khanadat         ###   ########.jp       */
+/*   Created: 2025/04/26 04:57:31 by khanadat          #+#    #+#             */
+/*   Updated: 2025/06/23 20:33:14 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

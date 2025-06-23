@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khanadat <khanadat@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-05-28 07:04:04 by khanadat          #+#    #+#             */
-/*   Updated: 2025-05-28 07:04:04 by khanadat         ###   ########.jp       */
+/*   Created: 2025/05/28 07:04:04 by khanadat          #+#    #+#             */
+/*   Updated: 2025/06/23 20:33:20 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

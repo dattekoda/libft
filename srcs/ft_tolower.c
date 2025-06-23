@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khanadat <khanadat@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-25 11:48:56 by khanadat          #+#    #+#             */
-/*   Updated: 2025-04-25 11:48:56 by khanadat         ###   ########.jp       */
+/*   Created: 2025/04/25 11:48:56 by khanadat          #+#    #+#             */
+/*   Updated: 2025/06/23 20:32:59 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

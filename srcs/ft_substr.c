@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khanadat <khanadat@student.42tokyo.jp>     #+#  +:+       +#+        */
+/*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-27 03:11:06 by khanadat          #+#    #+#             */
-/*   Updated: 2025-04-27 03:11:06 by khanadat         ###   ########.jp       */
+/*   Created: 2025/04/27 03:11:06 by khanadat          #+#    #+#             */
+/*   Updated: 2025/06/23 20:32:56 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
