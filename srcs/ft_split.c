@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 08:57:38 by khanadat          #+#    #+#             */
-/*   Updated: 2025/06/23 20:32:31 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:06:15 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**ft_split(const char *s, char c)
 	char	**split;
 	char	**_split;
 
-	split = (char **)ft_calloc(count_words(s, c), sizeof(char *));
+	split = (char **)ft_calloc(count_words(s, c) + 1, sizeof(char *));
 	_split = split;
 	while (split && *s)
 	{
