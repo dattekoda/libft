@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/07/10 15:29:30 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/07/10 15:40:55 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	read_to_str(int fd, t_gnl *gnl)
 	{
 		rd = read(fd, buf, BUFFER_SIZE);
 		if (rd < 0)
-			return (free(buf),free_err(gnl->str, -1));
+			return (free(buf), free_err(gnl->str, -1));
 		buf[rd] = '\0';
 		tmp = gnl->str;
 		gnl->str = ft_strjoin(tmp, buf);
@@ -73,7 +73,7 @@ int	ft_get_next_line(int fd, char **line)
 
 	rd = read_to_str(fd, &gnl);
 	if (rd < 0)
-		return(rd);
+		return (rd);
 	*line = get_line(&gnl);
 	if (!gnl.str[gnl.next])
 	{
