@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/07/10 15:40:55 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/07/10 15:42:43 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	ft_get_next_line(int fd, char **line)
 // 	while (gnl > 0)
 // 	{
 // 		gnl = ft_get_next_line(fd, &line);
+//		if (gnl < 0)
+//			break ;
 // 		printf("gnl = %d\n%s", gnl, line);
 // 		free(line);
 // 	}
