@@ -6,11 +6,21 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/07/10 15:42:43 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/07/10 15:58:36 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+// # ifndef BUFFER_SIZE
+// #  define BUFFER_SIZE 42
+// # endif
+
+// typedef struct s_gnl
+// {
+// 	char	*str;
+// 	int		now;
+// 	int		next;
+// }	t_gnl;
 
 static int	free_err(char *str, int output)
 {
@@ -85,6 +95,7 @@ int	ft_get_next_line(int fd, char **line)
 }
 
 // #include <stdio.h>
+// #include <fcntl.h>
 // int	main(int argc, char *argv[])
 // {
 // 	char	*line;
