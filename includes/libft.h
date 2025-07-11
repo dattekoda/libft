@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:52:23 by khanadat          #+#    #+#             */
-/*   Updated: 2025/07/10 15:40:31 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:27:28 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 
 typedef struct s_gnl
 {
-	char	*str;
-	int		now;
-	int		next;
+	char		*str;
+	ptrdiff_t	now;
+	ptrdiff_t	next;
 }	t_gnl;
 
 typedef struct s_list

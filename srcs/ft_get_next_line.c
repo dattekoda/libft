@@ -6,20 +6,20 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/07/10 15:58:36 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:31:01 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
-// # ifndef BUFFER_SIZE
-// #  define BUFFER_SIZE 42
-// # endif
+// #ifndef BUFFER_SIZE
+// # define BUFFER_SIZE 42
+// #endif
 
 // typedef struct s_gnl
 // {
-// 	char	*str;
-// 	int		now;
-// 	int		next;
+// 	char		*str;
+// 	ptrdiff_t	now;
+// 	ptrdiff_t	next;
 // }	t_gnl;
 
 static int	free_err(char *str, int output)
@@ -38,7 +38,11 @@ static int	find_nl(t_gnl *gnl)
 				return (1);
 	}
 	else
+	{
 		gnl->str = ft_strdup("");
+		if (!gnl->str)
+			return (1);
+	}
 	return (0);
 }
 
@@ -64,6 +68,8 @@ static int	read_to_str(int fd, t_gnl *gnl)
 		if (!gnl->str)
 			return (free_err(buf, -2));
 	}
+	if (!gnl->str)
+		return (free_err(buf, -2));
 	return (free_err(buf, rd));
 }
 
@@ -108,8 +114,8 @@ int	ft_get_next_line(int fd, char **line)
 // 	while (gnl > 0)
 // 	{
 // 		gnl = ft_get_next_line(fd, &line);
-//		if (gnl < 0)
-//			break ;
+// 		if (gnl < 0)
+// 			break ;
 // 		printf("gnl = %d\n%s", gnl, line);
 // 		free(line);
 // 	}
