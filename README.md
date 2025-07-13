@@ -5,4 +5,4 @@
 
 ## 2025/7/10
 
-理想的なget_next_line、strndupの追加
+理想的なft_get_next_line、strndupの追加
