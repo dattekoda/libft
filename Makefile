@@ -1,13 +1,10 @@
-NAME := libft.a
-CC := cc
-CFLAGS := -Wall -Wextra -Werror -I includes
-AR := ar rcs
-RM := rm -f
+NAME = libft.a
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I includes
+AR = ar rcs
+RM = rm -f
 
-SRC_DIR := srcs
-BONUS_DIR := bonus
-
-SRC := srcs/ft_isalpha.c srcs/ft_isdigit.c srcs/ft_isalnum.c \
+SRC = srcs/ft_isalpha.c srcs/ft_isdigit.c srcs/ft_isalnum.c \
 srcs/ft_isascii.c srcs/ft_isprint.c srcs/ft_strlen.c \
 srcs/ft_toupper.c srcs/ft_tolower.c srcs/ft_memset.c \
 srcs/ft_bzero.c srcs/ft_memcpy.c srcs/ft_memmove.c \
@@ -21,23 +18,26 @@ srcs/ft_putchar_fd.c srcs/ft_putstr_fd.c \
 srcs/ft_putendl_fd.c srcs/ft_putnbr_fd.c srcs/ft_strndup.c \
 srcs/ft_get_next_line.c srcs/ft_strcmp.c srcs/ft_abs.c
 
-BONUS := bonus/ft_lstnew_bonus.c bonus/ft_lstadd_front_bonus.c bonus/ft_lstsize_bonus.c \
+BONUS = bonus/ft_lstnew_bonus.c bonus/ft_lstadd_front_bonus.c bonus/ft_lstsize_bonus.c \
 bonus/ft_lstlast_bonus.c bonus/ft_lstadd_back_bonus.c bonus/ft_lstdelone_bonus.c \
 bonus/ft_lstclear_bonus.c bonus/ft_lstiter_bonus.c bonus/ft_lstmap_bonus.c
 
-OBJ			:= $(SRC:.c=.o)
-OBJ_BONUS	:= $(BONUS:.c=.o)
-OBJ_ALL		:= $(OBJ)
+OBJ			= $(SRC:.c=.o)
+OBJ_BONUS	= $(BONUS:.c=.o)
+BUILD_OBJ	:= $(OBJ)
 
-.PHONY: all clean fclean re
+ifeq ($(MAKECMDGOALS), bonus)
+	BUILD_OBJ += $(OBJ_BONUS)
+endif
+
+.PHONY: all clean fclean re bonus rebonus
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(BUILD_OBJ)
 	$(AR) $@ $^
 
-bonus: $(OBJ) $(OBJ_BONUS)
-	$(AR) $(NAME) $^
+bonus: $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -49,3 +49,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+rebonus: fclean bonus
