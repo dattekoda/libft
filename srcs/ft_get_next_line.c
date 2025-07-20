@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/07/20 15:52:22 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/07/20 17:09:59 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,38 @@
 // 	ptrdiff_t	tail;
 // }	t_gnl;
 
+#define ERR_MALLOC -2
+#define ERR_READ -1
+#define GNL_EOF 0
+#define GNL_LINE 1
+#define NL_FOUND 1
+#define NL_NOT 0
+
+static int	free_return(char **str, int output);
+static int	find_nl(t_gnl *gnl);
+static int	read_to_str(int fd, t_gnl *gnl);
+static char	*get_line(t_gnl *gnl);
+
+int	ft_get_next_line(int fd, char **line)
+{
+	static t_gnl	gnl = {NULL, 0, -1};
+	int				rd;
+
+	if (!gnl.str)
+		gnl.str = ft_strdup("");
+	if (!gnl.str)
+		return (ERR_MALLOC);
+	rd = read_to_str(fd, &gnl);
+	if (rd < 0)
+		return (rd);
+	if (rd == 0 && (!gnl.str || !gnl.str[gnl.head]))
+		return (free_return (&gnl.str, GNL_EOF));
+	*line = get_line(&gnl);
+	if (*line)
+		return (GNL_LINE);
+	return (ERR_MALLOC);
+}
+
 static int	free_return(char **str, int output)
 {
 	if (*str)
@@ -34,19 +66,18 @@ static int	free_return(char **str, int output)
 
 static int	find_nl(t_gnl *gnl)
 {
-	if (gnl->str)
+	ptrdiff_t	i;
+
+	i = gnl->tail;
+	while (gnl->str[++i])
 	{
-		while (gnl->str[++(gnl->tail)])
-			if (gnl->str[gnl->tail] == '\n')
-				return (1);
+		if (gnl->str[i] == '\n')
+		{
+			gnl->tail = i;
+			return (NL_FOUND);
+		}
 	}
-	else
-	{
-		gnl->str = ft_strdup("");
-		if (!gnl->str)
-			return (1);
-	}
-	return (0);
+	return (NL_NOT);
 }
 
 static int	read_to_str(int fd, t_gnl *gnl)
@@ -58,21 +89,21 @@ static int	read_to_str(int fd, t_gnl *gnl)
 	rd = 1;
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
-		return (free_return(&gnl->str, -2));
+		return (free_return(&gnl->str, ERR_MALLOC));
 	while (!find_nl(gnl) && rd > 0)
 	{
 		rd = read(fd, buf, BUFFER_SIZE);
 		if (rd < 0)
-			return (free(buf), free_return(&gnl->str, -1));
+			return (free(buf), free_return(&gnl->str, ERR_READ));
 		buf[rd] = '\0';
 		tmp = gnl->str;
 		gnl->str = ft_strjoin(tmp, buf);
 		free(tmp);
 		if (!gnl->str)
-			return (free_return(&buf, -2));
+			return (free_return(&buf, ERR_MALLOC));
 	}
 	if (!gnl->str)
-		return (free_return(&buf, -2));
+		return (free_return(&buf, ERR_MALLOC));
 	return (free_return(&buf, rd));
 }
 
@@ -83,25 +114,6 @@ static char	*get_line(t_gnl *gnl)
 	line = ft_strndup(gnl->str + gnl->head, gnl->tail - gnl->head + 1);
 	gnl->head = gnl->tail + 1;
 	return (line);
-}
-
-int	ft_get_next_line(int fd, char **line)
-{
-	static t_gnl	gnl = {NULL, 0, -1};
-	int				rd;
-
-	rd = read_to_str(fd, &gnl);
-	if (rd < 0)
-		return (rd);
-	if (!gnl.str[gnl.head])
-	{
-		gnl.head = free_return(&gnl.str, 0);
-		gnl.tail = -1;
-		if (rd == 0)
-			return (0);
-	}
-	*line = get_line(&gnl);
-	return (1);
 }
 
 // #include <stdio.h>
@@ -124,5 +136,28 @@ int	ft_get_next_line(int fd, char **line)
 // 		free(line);
 // 	}
 // 	close(fd);
+// 	return (0);
+// }
+
+// #include <stdio.h>
+// #include <fcntl.h>
+// int	main(int argc, char *argv[])
+// {
+// 	char	*line;
+// 	int		gnl;
+// 	int		fd;
+// 	if (argc != 2)
+// 		return (1);
+// 	gnl = 1;
+// 	while (gnl > 0)
+// 	{
+// 		gnl = ft_get_next_line(STDIN_FILENO, &line);
+// 		if (gnl < 0)
+// 			break ;
+// 		if (gnl == 0)
+// 			break ;
+// 		printf("%d, %s", gnl, line);
+// 		free(line);
+// 	}
 // 	return (0);
 // }
