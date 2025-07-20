@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/07/20 17:09:59 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/07/20 17:33:13 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	find_nl(t_gnl *gnl);
 static int	read_to_str(int fd, t_gnl *gnl);
 static char	*get_line(t_gnl *gnl);
 
+//set fd = GNL_FREE_FD and you can free(gnl.str)
 int	ft_get_next_line(int fd, char **line)
 {
 	static t_gnl	gnl = {NULL, 0, -1};
@@ -43,6 +44,8 @@ int	ft_get_next_line(int fd, char **line)
 		gnl.str = ft_strdup("");
 	if (!gnl.str)
 		return (ERR_MALLOC);
+	if (fd == GNL_FREE_FD)
+		return (free_return (&gnl.str, GNL_EOF));
 	rd = read_to_str(fd, &gnl);
 	if (rd < 0)
 		return (rd);
@@ -146,8 +149,6 @@ static char	*get_line(t_gnl *gnl)
 // 	char	*line;
 // 	int		gnl;
 // 	int		fd;
-// 	if (argc != 2)
-// 		return (1);
 // 	gnl = 1;
 // 	while (gnl > 0)
 // 	{
