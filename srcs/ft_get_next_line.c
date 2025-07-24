@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/07/20 17:33:13 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/07/24 17:57:09 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	ft_get_next_line(int fd, char **line)
 	if (rd < 0)
 		return (rd);
 	if (rd == 0 && (!gnl.str || !gnl.str[gnl.head]))
+	{
+		*line = NULL;
 		return (free_return (&gnl.str, GNL_EOF));
+	}
 	*line = get_line(&gnl);
 	if (*line)
 		return (GNL_LINE);
