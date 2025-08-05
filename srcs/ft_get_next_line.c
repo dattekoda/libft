@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/07/24 17:57:09 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/08/05 07:03:53 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@
 
 // typedef struct s_gnl
 // {
-// 	char		*str;
-// 	ptrdiff_t	head;
-// 	ptrdiff_t	tail;
+// 	char	*str;
+// 	size_t	head;
+// 	size_t	tail;
 // }	t_gnl;
 
+#define ERR_INVALID -3
 #define ERR_MALLOC -2
 #define ERR_READ -1
 #define GNL_EOF 0
 #define GNL_LINE 1
 #define NL_FOUND 1
-#define NL_NOT 0
+#define NL_NOT_FOUND 0
 
 static int	free_return(char **str, int output);
-static int	find_nl(t_gnl *gnl);
 static int	read_to_str(int fd, t_gnl *gnl);
 static char	*get_line(t_gnl *gnl);
 
@@ -45,16 +45,15 @@ int	ft_get_next_line(int fd, char **line)
 	if (!gnl.str)
 		return (ERR_MALLOC);
 	if (fd == GNL_FREE_FD)
-		return (free_return (&gnl.str, GNL_EOF));
+		return (free_return(&gnl.str, GNL_EOF));
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (free_return(&gnl.str, ERR_INVALID));
 	rd = read_to_str(fd, &gnl);
 	if (rd < 0)
 		return (rd);
-	if (rd == 0 && (!gnl.str || !gnl.str[gnl.head]))
-	{
-		*line = NULL;
-		return (free_return (&gnl.str, GNL_EOF));
-	}
 	*line = get_line(&gnl);
+	if (rd == 0)
+		return (free_return(&gnl.str, GNL_EOF));
 	if (*line)
 		return (GNL_LINE);
 	return (ERR_MALLOC);
@@ -70,22 +69,6 @@ static int	free_return(char **str, int output)
 	return (output);
 }
 
-static int	find_nl(t_gnl *gnl)
-{
-	ptrdiff_t	i;
-
-	i = gnl->tail;
-	while (gnl->str[++i])
-	{
-		if (gnl->str[i] == '\n')
-		{
-			gnl->tail = i;
-			return (NL_FOUND);
-		}
-	}
-	return (NL_NOT);
-}
-
 static int	read_to_str(int fd, t_gnl *gnl)
 {
 	int		rd;
@@ -96,7 +79,7 @@ static int	read_to_str(int fd, t_gnl *gnl)
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (free_return(&gnl->str, ERR_MALLOC));
-	while (!find_nl(gnl) && rd > 0)
+	while (!ft_strchr(gnl->str + gnl->head, '\n') && rd > 0)
 	{
 		rd = read(fd, buf, BUFFER_SIZE);
 		if (rd < 0)
@@ -117,6 +100,7 @@ static char	*get_line(t_gnl *gnl)
 {
 	char	*line;
 
+	gnl->tail = ft_strchr(gnl->str + gnl->head, '\n') - gnl->str;
 	line = ft_strndup(gnl->str + gnl->head, gnl->tail - gnl->head + 1);
 	gnl->head = gnl->tail + 1;
 	return (line);
