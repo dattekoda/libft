@@ -27,7 +27,9 @@ OBJ			= $(SRC:.c=.o)
 OBJ_BONUS	= $(BONUS:.c=.o)
 BUILD_OBJ	:= $(OBJ)
 
-ifeq ($(MAKECMDGOALS), bonus)
+ifeq ($(MAKECMDGOALS),bonus)
+	BUILD_OBJ += $(OBJ_BONUS)
+else ifeq ($(MAKECMDGOALS),rebonus)
 	BUILD_OBJ += $(OBJ_BONUS)
 endif
 

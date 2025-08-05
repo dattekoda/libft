@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/08/05 07:03:53 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/08/06 03:23:06 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,13 @@ static int	read_to_str(int fd, t_gnl *gnl)
 
 static char	*get_line(t_gnl *gnl)
 {
+	char	*nl;
 	char	*line;
 
-	gnl->tail = ft_strchr(gnl->str + gnl->head, '\n') - gnl->str;
+	nl = ft_strchr(gnl->str + gnl->head, '\n');
+	if (!nl)
+		nl = gnl->str + ft_strlen(gnl->str);
+	gnl->tail = nl - gnl->str;
 	line = ft_strndup(gnl->str + gnl->head, gnl->tail - gnl->head + 1);
 	gnl->head = gnl->tail + 1;
 	return (line);
