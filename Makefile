@@ -17,7 +17,7 @@ srcs/ft_split.c srcs/ft_strmapi.c srcs/ft_striteri.c \
 srcs/ft_putchar_fd.c srcs/ft_putstr_fd.c \
 srcs/ft_putendl_fd.c srcs/ft_putnbr_fd.c srcs/ft_strndup.c \
 srcs/ft_get_next_line.c srcs/ft_strcmp.c srcs/ft_abs.c \
-srcs/ft_max.c srcs/ft_min.c
+srcs/ft_max.c srcs/ft_min.c srcs/ft_isspace.c
 
 BONUS = bonus/ft_lstnew_bonus.c bonus/ft_lstadd_front_bonus.c bonus/ft_lstsize_bonus.c \
 bonus/ft_lstlast_bonus.c bonus/ft_lstadd_back_bonus.c bonus/ft_lstdelone_bonus.c \
