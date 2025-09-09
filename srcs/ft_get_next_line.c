@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:14 by khanadat          #+#    #+#             */
-/*   Updated: 2025/09/08 15:59:49 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:48:03 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@
 #define NL_FOUND 1
 #define NL_NOT_FOUND 0
 
+void	safe_free(char **store)
+{
+	free(*store);
+	*store = NULL;
+}
+
 int	write_store(int fd, char **store)
 {
 	char	buf[BUFFER_SIZE + 1];
@@ -46,10 +52,10 @@ int	write_store(int fd, char **store)
 	{
 		rd = read(fd, buf, BUFFER_SIZE);
 		if (rd < 0)
-			return (free(*store), ERR_READ);
+			return (safe_free(*store), ERR_READ);
 		buf[rd] = 0;
 		tmp = ft_strjoin(*store, buf);
-		free(*store);
+		safe_free(*store);
 		if (!tmp)
 			return (ERR_MALLOC);
 		*store = tmp;
@@ -86,14 +92,16 @@ int	ft_get_next_line(int fd, char **line)
 	static char	*store = NULL;
 	int			ws_ret;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (ERR_INVALID);
 	*line = NULL;
 	ws_ret = write_store(fd, &store);
 	if (ws_ret)
 		return (ws_ret);
 	if (!store[0])
-		return (free(store), GNL_EOF);
+		return (safe_free(store), GNL_EOF);
 	if (get_line(line, &store))
-		return (free(store), ERR_MALLOC);
+		return (safe_free(store), ERR_MALLOC);
 	return (GNL_LINE);
 }
 
@@ -177,28 +185,28 @@ int	ft_get_next_line(int fd, char **line)
 // 	return (line);
 // }
 
-#include <stdio.h>
-#include <fcntl.h>
-int	main(int argc, char *argv[])
-{
-	char	*line;
-	int		gnl;
-	int		fd;
-	if (argc != 2)
-		return (1);
-	fd = open(argv[1], O_RDONLY);
-	gnl = 1;
-	while (gnl > 0)
-	{
-		gnl = ft_get_next_line(fd, &line);
-		if (gnl < 0)
-			break ;
-		printf("gnl = %d\n%s", gnl, line);
-		free(line);
-	}
-	close(fd);
-	return (0);
-}
+// #include <stdio.h>
+// #include <fcntl.h>
+// int	main(int argc, char *argv[])
+// {
+// 	char	*line;
+// 	int		gnl;
+// 	int		fd;
+// 	if (argc != 2)
+// 		return (1);
+// 	fd = open(argv[1], O_RDONLY);
+// 	gnl = 1;
+// 	while (gnl > 0)
+// 	{
+// 		gnl = ft_get_next_line(fd, &line);
+// 		if (gnl < 0)
+// 			break ;
+// 		printf("gnl = %d\n%s", gnl, line);
+// 		free(line);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }
 
 // #include <stdio.h>
 // #include <fcntl.h>
