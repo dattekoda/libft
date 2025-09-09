@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 06:02:28 by khanadat          #+#    #+#             */
-/*   Updated: 2025/09/08 23:47:46 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:27:38 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*join;
 	size_t	len1;
 	size_t	len2;
-	size_t	i;
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
@@ -25,5 +24,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!join)
 		return (NULL);
 	ft_memmove(join, s1, len1);
-	return (ft_memmove(join + len1, s2, len2));
+	ft_memmove(join + len1, s2, len2);
+	return (join);
 }

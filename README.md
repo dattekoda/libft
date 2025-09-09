@@ -25,4 +25,4 @@ ft_gnl: get_line内、ft_strchr == NULL のときのエラーハンドリング�
 ft_gnl: ft_get_next_lineの構造をシンプルにリファクタリング。
 
 ## 2025/9/9
-もろもろのリファクタリング
+もろもろのリファクタリング, ft_gnlのデバグ
