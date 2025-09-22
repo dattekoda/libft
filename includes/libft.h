@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:52:23 by khanadat          #+#    #+#             */
-/*   Updated: 2025/09/10 02:26:46 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:34:39 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,11 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
+// set line including '\n'
+// if get line successfully return 1
+// if eof return 0
+// read error -1 malloc error -2
+// invalid input -3
 int		ft_get_next_line(int fd, char **line);
 int		ft_abs(int a);
 #endif
