@@ -29,3 +29,6 @@ ft_gnl: ft_get_next_lineの構造をシンプルにリファクタリング。
 
 ## 2025/9/10
 ft_isspace.cの追加
+
+## 2025/9/28
+ft_itoa.cのリファクタリング

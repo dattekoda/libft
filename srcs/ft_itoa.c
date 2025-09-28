@@ -6,12 +6,53 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 11:48:59 by khanadat          #+#    #+#             */
-/*   Updated: 2025/06/23 20:33:11 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/09/28 12:45:13 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdbool.h>
 #include "../includes/libft.h"
 
+char	*ft_itoa(int n)
+{
+	static const size_t	res_size = 12;
+	char				res[13];
+	size_t				behind;
+	bool				issigned;
+
+	behind = (size_t)res_size;
+	ft_bzero(res, res_size + 1);
+	if (n == 0)
+		return (ft_strdup("0"));
+	issigned = (n < 0);
+	if (issigned)
+	{
+		res[--behind] = (-1) * (n % 10) + '0';
+		n = (-1) * (n / 10);
+	}
+	while (n && behind >= 0)
+	{
+		res[--behind] = n % 10 + '0';
+		n /= 10;
+	}
+	if (issigned)
+		res[--behind] = '-';
+	return (ft_strdup(res + behind));
+}
+
+// #include <stdio.h>
+// #include <stdlib.h>
+// int main(int argc, char *argv[])
+// {
+// 	if (argc != 2)
+// 		return 1;
+// 	int a = ft_atoi(argv[1]);
+
+// 	printf("%s\n", ft_itoa(a));
+// 	return (0);
+// }
+
+/*
 static int	count_digit(int n)
 {
 	int	digit;
@@ -69,12 +110,4 @@ char	*ft_itoa(int n)
 	}
 	return (res);
 }
-/*
-#include <stdio.h>
-int main(void)
-{
-	int a = -2147483648;
-
-	printf("%s\n", ft_itoa(a));
-	return (0);
-}*/
+*/
