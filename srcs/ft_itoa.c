@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 11:48:59 by khanadat          #+#    #+#             */
-/*   Updated: 2025/09/28 12:45:13 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/10/11 18:27:14 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_itoa(int n)
 		res[--behind] = (-1) * (n % 10) + '0';
 		n = (-1) * (n / 10);
 	}
-	while (n && behind >= 0)
+	while (n)
 	{
 		res[--behind] = n % 10 + '0';
 		n /= 10;
