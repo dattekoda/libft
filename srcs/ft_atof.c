@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:40:36 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/10 20:01:10 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/11 10:02:16 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include <stdio.h>
 
 # define ATOF_BIAS 0b01111111111
+# define TWO_MINUS_ONE		0.5
+# define TWO_MINUS_TWO		0.25
+# define TWO_MINUS_THREE	0.125
+# define TWO_MINUS_FOUR		0.0625
+# define TWO_MINUS_FIVE		0.03125
+# define TWO_MINUS_SIX		0.015625
+# define TWO_MINUS_SEVEN	0.0078125
+# define TWO_MINUS_EIGHT	0.00390625
+# define TWO_MINUS_NINE		0.001953125
+# define TWO_MINUS_TEN		0.0009765625
 
 // 指数部の桁数を取得する関数
 int	get_exp(const char *nptr)
