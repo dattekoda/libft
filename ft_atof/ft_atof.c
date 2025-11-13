@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:40:36 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/11 12:09:05 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/13 19:58:20 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,34 @@
 # define EXP_BIAS 0b01111111111
 # define EXP_UNIT 0b0000000000000001
 
-// 指数部の桁数を取得する関数
-void	set_exp(unsigned char *res_ptr, const char *nptr)
-{
-	uint16_t			exp;
-	unsigned long long	comp;
+#if 1
 
-	exp = EXP_BIAS;
-	while (ft_isdigit(*nptr))
-	{
-		exp += EXP_UNIT;
-		nptr++;
-	}
-	if (!exp || *nptr != '.')
-		return (exp);
-	nptr++;
-	comp = 0;
-	while (ft_isdigit(*nptr))
-	{
-	}
-}
+// 指数部の桁数を取得する関数
+// void	set_exp(unsigned char *res_ptr, const char *nptr)
+// {
+// 	uint16_t			exp;
+// 	unsigned long long	comp;
+
+// 	exp = EXP_BIAS;
+// 	while (ft_isdigit(*nptr))
+// 	{
+// 		exp += EXP_UNIT;
+// 		nptr++;
+// 	}
+// 	if (!exp || *nptr != '.')
+// 		return (exp);
+// 	nptr++;
+// 	comp = 0;
+// 	while (ft_isdigit(*nptr))
+// 	{
+// 	}
+// }
 
 double	ft_atof(const char *nptr)
 {
 	double				res;
-	unsigned char		*res_ptr;
 	double				base;
-	int					exp;
+	unsigned char		*res_ptr;
 
 	res = 0;
 	res_ptr = (unsigned char *)&res;
@@ -55,7 +56,6 @@ double	ft_atof(const char *nptr)
 		nptr++;
 	if (*nptr == '+' || *nptr == '-')
 		res_ptr[7] |= (1 << 7) * (*(nptr++) == '-');
-	set_exp(res_ptr, nptr);
 	while (ft_isdigit(*nptr))
 		res = res * 10 + *(nptr++) - '0';
 	if (*nptr != '.')
@@ -65,23 +65,22 @@ double	ft_atof(const char *nptr)
 	while (ft_isdigit(*nptr))
 	{
 		res += (*(nptr++) - '0') * base;
-		base /= 10;
+		base *= 0.1;
 	}
 	return (res);
 }
 
-#if 0
 #include <stdlib.h>
 int	main(int argc, char *argv[]) {
-	// double	my;
+	double	my;
 	double	real;
 
 	if (argc == 1)
 		return 1;
-	// my = ft_atof(argv[1]);
+	my = ft_atof(argv[1]);
 	real = atof(argv[1]);
-	// printf("ft\t:%f\n", my);
-	printf("orig\t:%f\n", real);
+	printf("ft\t:%.20f\n", my);
+	printf("orig\t:%.20f\n", real);
 	return (0);
 }
 #endif
@@ -132,6 +131,7 @@ void	print_memory_bits(void *ptr, size_t size, bool big) {
 	if (big) {
 		for (size_t i = size; i != 0; ) {
 			print_bytes_as_binary(bytes[i]);
+			--i;
 			if (i != 0)
 				write(1, ", ", 2);
 		}
@@ -248,41 +248,42 @@ unsigned long long	get_minus_table(int i)
 	return (minus_table_3(i));
 }
 
-int	main(int argc, char *argv[])
-{
-	u_double	u;
-
-	if (argc == 1)
-		return (1);
-	if (argc == 2)
-		u.i = 0x3fb999999999999a;
-	else
-		u.i = get_minus_table(atoi(argv[2]));
-	printf("double: %f\n", u.d);
-	print_double_bits(&u.i);
-	if (u.d < atof(argv[1]))
-		printf("big\n");
-	else
-		printf("small\n");
-	return (0);
-}
-
-// #if 0
 // int	main(int argc, char *argv[])
 // {
-// 	bool	big = false;
-// 	if (argc == 1)
-// 		return 1;
-// 	if (2 < argc)
-// 		big = true;
-// 	double	atof_res = atof(argv[1]);
-// 	uint64_t	uint_val;
+// 	u_double	u;
 
-// 	memcpy(&uint_val, &atof_res, sizeof(double));
-// 	printf("atof\t:%f\n", atof_res);
-// 	printf("binary\t:0x%016llx\n", (unsigned long long)uint_val);
-// 	print_double_bits(&uint_val);
-// 	return 0;
+// 	if (argc == 1)
+// 		return (1);
+// 	if (argc == 2)
+// 		u.i = 0x3fb999999999999a;
+// 	else
+// 		u.i = get_minus_table(atoi(argv[2]));
+// 	printf("double: %f\n", u.d);
+// 	print_double_bits(&u.i);
+// 	if (u.d < atof(argv[1]))
+// 		printf("big\n");
+// 	else
+// 		printf("small\n");
+// 	return (0);
 // }
-// #endif
+
+#if 0
+int	main(int argc, char *argv[])
+{
+	bool	big = false;
+	if (argc == 1)
+		return 1;
+	if (2 < argc)
+		big = true;
+	double	atof_res = atof(argv[1]);
+	uint64_t	uint_val;
+
+	memcpy(&uint_val, &atof_res, sizeof(double));
+	printf("atof\t:%.22f\n", atof_res);
+	printf("binary\t:0x%016llx\n", (unsigned long long)uint_val);
+	print_double_bits(&uint_val);
+	return 0;
+}
+
+#endif
 // #endif
