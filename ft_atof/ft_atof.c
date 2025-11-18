@@ -6,11 +6,18 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:40:36 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/13 19:58:20 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:46:03 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+double	ft_atof(const char *str)
+{
+	return (ft_strtod(str, (char **)NULL));
+}
+
+#if 0
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -18,10 +25,8 @@
 #include <string.h>
 #include <unistd.h>
 
-# define EXP_BIAS 0b01111111111
 # define EXP_UNIT 0b0000000000000001
-
-#if 1
+# define EXP_BIAS 0b01111111111
 
 // 指数部の桁数を取得する関数
 // void	set_exp(unsigned char *res_ptr, const char *nptr)
@@ -84,6 +89,8 @@ int	main(int argc, char *argv[]) {
 	return (0);
 }
 #endif
+
+#if 0
 
 void	print_specified_bytes_as_binary(unsigned char byte, int start, int end) {
 	if (start < end || 7 < start || end < 0)
@@ -247,6 +254,8 @@ unsigned long long	get_minus_table(int i)
 		return (minus_table_2(i));
 	return (minus_table_3(i));
 }
+
+#endif
 
 // int	main(int argc, char *argv[])
 // {

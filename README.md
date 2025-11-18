@@ -57,3 +57,5 @@ ft_atof()の方針が定まらず。
 ## 2025/11/18
 `ft_atof/ft_strtod.c`の追加。   
 `sun micro systems`から`glibc`を参考にという方針に変更。   
+`ft_atof/ft_strtod`ヘルパー関数の追加、パース部分がほぼ完了。   
+`exp_limit`の計算がなぜ、そうなるのか復習が必要。   

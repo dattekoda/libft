@@ -6,285 +6,237 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:33:17 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/18 08:56:06 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/18 22:09:46 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
-#define PASTE(a,b) a ## b
-typedef unsigned long int	mp_limb_t;
-typedef long int			mp_size_t;
-typedef long				int_max_t;
-
-#define BITS_PER_MP_LIMB 64
-
-#define FLT_MIN_EXP 24
-#define FLT_MANT_DIG 53
-
-#define MIN_EXP		PASTE(FLT, _MIN_EXP)
-#define MANT_DIG	PASTE(FLT, _MANT_DIG)
-
-#define howmany(x,y)	(((x)+((y)-1))/(y))
-#define MPNSIZE	(howmany (1 + ((MANT_DIG - MIN_EXP + 2) * 10) / 3, \
-					BITS_PER_MP_LIMB))
-
-#define MPN_VAR(name) mp_limb_t name[MPNSIZE]; mp_size_t name ## size
-
-#define MAX_DIG_PER_LIMB	19
-#define MAX_FAC_PER_LIMB	10000000000000000000UL
-
-#define RETURN_LIMB_SIZE	howmany (MANT_DIG, BITS_PER_MP_LIMB)
-
-const mp_limb_t	_ten_in_limb[MAX_DIG_PER_LIMB + 1] = {
-	0,
-	10,
-	100,
-	1000,
-	10000,
-	100000L,
-	1000000L,
-	10000000L,
-	100000000L,
-	1000000000ULL,
-	10000000000ULL,
-	100000000000ULL,
-	1000000000000ULL,
-	10000000000000ULL,
-	100000000000000ULL,
-	1000000000000000ULL,
-	10000000000000000ULL,
-	100000000000000000ULL,
-	1000000000000000000ULL,
-	10000000000000000000ULL
-};
-
-
-mp_limb_t	num[(((1 + ((53 - (-1021) + 2) * 10) / 3) + ((BITS_PER_MP_LIMB)-1))/(BITS_PER_MP_LIMB)) + 2];
-
-double	ft_strtof(const char *nptr, char **endptr)
-{
-	int			negative;	// The sign of the number.
-	MPN_VAR (num);
-	int_max_t	exponent;
-
-	int			base = 10;
-	MPN_VAR (den);
-	
-	mp_limb_t	retval[RETURN_LIMB_SIZE];
-	int			bits;
-
-	const char	*cp, *tp;
-	const char	*startp, *start_of_digits;
-	const char	*expp;
-	
-	size_t		dig_no, int_no, lead_no;
-	char	c;
-
-	const char	*decimal;
-	size_t		decimal_len;
-
-	const char	*thousands = NULL;
-}
-
-
-#ifndef SUN_MICRO_SYSTEMS
-# define SUN_MICRO_SYSTEMS 0
-#endif
-
-#if SUN_MICRO_SYSTEMS
 #include "libft.h"
+#include "ft_strtod_define.h"
+#include "ft_strtod_utils.h"
+#include <stddef.h>
+#include <stdbool.h>
+#include <endian.h> // big endian or little
+
 #include <stdio.h>
-#ifndef TRUE
-# define TRUE 1
-#endif
 
-#ifndef FALSE
-# define FALSE 0
-#endif
-
-#ifndef NULL
-# define NULL 0
-#endif
-
-static int	maxExponent = 511;
-
-static double	powers0f10[] = {
-	10.,
-	100.,
-	1.0e4,
-	1.0e8,
-	1.0e16,
-	1.0e32,
-	1.0e64,
-	1.0e128,
-	1.0e256
-};
-
-int	set_strtod(int fraction, char **endPtr, int sign, char *p)
+void	set_ten_in_limb(mp_limb_t *ten_in_limb)
 {
-	if (endPtr)
-		*endPtr = (char *)p;
-	if (sign)
-		return (-fraction);
-	return (fraction);
+	const mp_limb_t	_ten_in_limb[MAX_DIG_PER_LIMB + 1] = {
+		1,
+		10,
+		100,
+		1000,
+		10000,
+		100000L,
+		1000000L,
+		10000000L,
+		100000000L,
+		1000000000ULL,
+		10000000000ULL,
+		100000000000ULL,
+		1000000000000ULL,
+		10000000000000ULL,
+		100000000000000ULL,
+		1000000000000000ULL,
+		10000000000000000ULL,
+		100000000000000000ULL,
+		1000000000000000000ULL,
+		10000000000000000000ULL
+	};
+
+	ft_memmove(ten_in_limb, _ten_in_limb, \
+		sizeof(mp_limb_t) * (MAX_DIG_PER_LIMB + 1));
 }
 
-int	get_frac(int range, const char **p, int *mantSize)
+void	set_base(t_strtod *tod)
 {
-	int				frac;
-	register int	c;
-	
-	frac = 0;
-	while (range < *mantSize)
+	bool		has_hex;
+	const char	*peek;
+
+	tod->base = 10;
+	if (!(*(tod->cp) == '0' \
+		&& (ft_tolower(*(tod->cp + 1)) == 'x')))
+		return ;
+	peek = tod->cp + 2;
+	has_hex = (bool)((ft_isdigit(*peek) \
+		|| is_hexalpha(*peek)));
+	if (has_hex == false && *peek == '.')
 	{
-		c = *((*p)++);
-		if (c == '.')
-			c = *((*p)++);
-		frac = 10 * frac + (c - '0');
-		(*mantSize)--;
+		peek++;
+		has_hex = (bool)((ft_isdigit(*peek) \
+		|| is_hexalpha(*peek)));
 	}
-	return (frac);
+	if (!has_hex)
+		return ;
+	tod->base = 16;
+	tod->cp += 2;
 }
 
-#if 1
-double	ft_strtod(const char *string, char **endPtr)
+bool	count_zeros(t_strtod *tod)
 {
-	int	sign = FALSE, expSign = FALSE;
-	double	fraction, dblExp, *d;
-	const char	*p;
-	register int	c;
-	int	exp = 0;
-	int	fracExp = 0;
-/* 	Exponent that derives from the fractional
-	part. Under normal circumstances, it is
-	the negative of the number of digits in F.
-	However, if I is very long, the last digits
-	of I get dropped. In this case, fracExp is
-	incremented one for each dropped digit. */
-	int	mantSize;
-	int	decPt;	// Number of mantissa digits BEFORE decimal point.
-	const char	*pExp;
+	size_t	i;
+	bool	already_point;
 
-	p = string;
-	while (ft_isspace(*p))
-		p++;
-	if (*p == '-' || *p == '+')
-		sign = (*(p++) == '-');
-	
-	// count the number of digits in the mantissa
-	// and also locate the decimal point.
-	decPt = -1;
-	mantSize = 0;
-	while (1) {
-		c = *p;
-		if (!ft_isdigit(c)) {
-			if (c != '.' || 0 <= decPt)
-				break ;
-			decPt = mantSize;
-		}
-		p++;
-		mantSize++;
-	}
-	// fprintf(stderr, "decPt\t\t: %d\n", decPt);
-	// fprintf(stderr, "mantSize\t: %d\n", mantSize);
-	
-	// Now stuck up the digits in the mantissa. Use two integers to
-	// collect 9 digits each (this is faster than using floating point).
-	// If the mantissa has more than 18 digits, ignore the extras, since
-	// they can't affact the value anyway.
-	
-	pExp = p;
-	p -= mantSize;
-	if (decPt < 0)
-		decPt = mantSize;
-	else
-		mantSize--;
-	if (18 < mantSize) {
-		fracExp = decPt - 18;
-		mantSize = 18;
-	}
-	else
-		fracExp = decPt - mantSize;
-	if (mantSize == 0)
+	i = 0;
+	already_point = false;
+	while (*(tod->cp) == '0')
+		(tod->cp)++;
+	if (*(tod->cp) == '.')
 	{
-		p = string;
-		return (set_strtod(0.0, endPtr, sign, (char *)p));
+		already_point = true;
+		(tod->cp)++;
 	}
-	else
+	while (*(tod->cp) == '0')
 	{
-		fprintf(stderr, "p    : %s\n", p);
-		fprintf(stderr, "mantS: %d\n", mantSize);
-		int	frac1, frac2;
-		frac1 = get_frac(9, &p, &mantSize); // if it has more than 9 mantSize
-		frac2 = get_frac(0, &p, &mantSize);
-		fraction = (1.0e9 * frac1) + frac2;
-		fprintf(stderr, "frac1: %d\n", frac1);
-		fprintf(stderr, "frac2: %d\n", frac2);
-		fprintf(stderr, "frac : %f\n", fraction);
+		(tod->cp)++;
+		(tod->lead_zero)++;
+		(tod->dig_no)++;
 	}
-
-	// skim off the exponent
-	p = pExp;
-	if ((*p == 'E') || (*p == 'e')) {
-		p++;
-		if (*p == '-' || *p == '+')
-			expSign = ((*(p++)) == '-');
-		while (ft_isdigit(*p))
-			exp = exp * 10 + (*(p++) - '0');
-	}
-	if (expSign)
-		exp = fracExp - exp;
-	else
-		exp = fracExp + exp;
-	fprintf(stderr, "exp:%d\n", exp);
-	// generate a loating-point number that represents the exponent.
-	// Do this by processing the exponent one bit at a time to combine
-	// many powers of 2 of 10. Then combine the exponent with the
-	// fraction.
-
-	if (exp < 0) {
-		expSign = TRUE;
-		exp = -exp;
-	}
-	else
-		expSign = FALSE;
-	if (maxExponent < exp)
-		exp = maxExponent;
-	dblExp = 1.0;
-	for (d = powers0f10; exp != 0; exp >>= 1, d += 1)
-	{
-		if (exp & 01)
-			dblExp *= *d;
-	}
-	fprintf(stderr, "dblExp:%f\n", dblExp);
-	if (expSign)
-		fraction /= dblExp;
-	else
-		fraction *= dblExp;
-	if (endPtr)
-		*endPtr = (char *)p;
-	if (sign)
-		return (-fraction);
-	return (fraction);
+	return (already_point);
 }
 
-#endif
+void	scan_digits(t_strtod *tod)
+{
+	bool	already_point;
 
-#include <stdlib.h>
-#include <stdio.h>
+	already_point = count_zeros(tod);
+	while (!already_point && tod_is_valid_num(tod))
+	{
+		(tod->cp)++;
+		(tod->int_no)++;
+		(tod->dig_no)++;
+	}
+	if (!already_point && *(tod->cp) == '.')
+		(tod->cp)++;
+	while (tod_is_valid_num(tod))
+	{
+		(tod->cp)++;
+		(tod->dig_no)++;
+	}
+}
+
+void	set_exp_limit(intmax_t *exp_limit, t_strtod *tod, bool sign_exp)
+{
+	*exp_limit = 0;
+	if (tod->base == 10)
+	{
+		if (sign_exp)
+			*exp_limit = -MIN_10_EXP + MANT_DIG + tod->int_no;
+		else if (0 < tod->int_no)
+			*exp_limit = MAX_10_EXP - tod->int_no + 1;
+		else
+			*exp_limit = MAX_10_EXP + tod->lead_zero + 1;
+	}
+	else
+	{
+		if (sign_exp)
+			*exp_limit = -MIN_EXP + MANT_DIG + tod->int_no;
+		else if (0 < tod->int_no)
+			*exp_limit = MAX_EXP - 4 * (intmax_t)tod->int_no;
+		else if (tod->lead_zero == (size_t)(-1))
+			*exp_limit = MAX_EXP + 3;
+		else
+			*exp_limit = MAX_EXP + 4 * (intmax_t)tod->lead_zero + 3;
+	}
+	if (*exp_limit < 0)
+		*exp_limit = 0;
+}
+
+int	is_overflow(t_strtod *tod, intmax_t exp_limit, bool sign_exp)
+{
+	if (exp_limit / 10 < tod->exponent \
+		|| (tod->exponent == exp_limit / 10 \
+			&& (*(tod->cp) - '0') > exp_limit % 10))
+	{
+		if (!sign_exp)
+			tod->ret = ft_infinity();
+		return (IS_OVER_FLOW);
+	}
+	return (NOT_OVER_FLOW);
+}
+
+// if overflow return 1
+int	parse_exp(t_strtod *tod)
+{
+	bool		sign_exp;
+	intmax_t	exp_limit;
+
+	sign_exp = false;
+	if (tod->base == 10 && ft_tolower(*(tod->cp)) == 'e')
+		(tod->cp)++;
+	else if (tod->base == 16 && ft_tolower(*(tod->cp) == 'p'))
+		(tod->cp)++;
+	else
+		return (NOT_OVER_FLOW);
+	if (*(tod->cp) == '+' || *(tod->cp) == '-')
+		sign_exp = (*((tod->cp)++) == '-');
+	set_exp_limit(&exp_limit, tod, sign_exp);
+	while (ft_isdigit(*(tod->cp)))
+	{
+		if (is_overflow(tod, exp_limit, sign_exp))
+			return (IS_OVER_FLOW);
+		tod->exponent = tod->exponent * 10 + (*((tod->cp)++) - '0');
+	}
+	tod->exponent *= (1 - 2 * sign_exp);
+	return (NOT_OVER_FLOW);
+}
+
+void	normalize_exponent(t_strtod *tod)
+{
+	intmax_t	incr;
+
+	if (tod->exponent < 0)
+	{
+		incr = -(intmax_t)tod->int_no;
+		if (incr < tod->exponent)
+			incr = tod->exponent;
+	}
+	else
+	{
+		incr = (intmax_t)tod->dig_no - (intmax_t)tod->int_no;
+		if (tod->exponent < incr)
+			incr = tod->exponent;
+	}
+	tod->int_no += incr;
+	tod->exponent -= incr;
+}
+
+double	ft_strtod(const char *nptr, char **endptr)
+{
+	t_strtod	tod;
+
+	ft_bzero(&tod, sizeof(t_strtod));
+	tod.cp = nptr;
+	skip_sp_set_negative(&tod);
+	if (is_inf(&tod) || is_nan(&tod))
+		return (set_endptr(&tod, endptr));
+	set_base(&tod);
+	tod.start_of_digits = tod.cp;
+	scan_digits(&tod);
+	if (parse_exp(&tod))
+		return (set_endptr(&tod, endptr));
+	normalize_exponent(&tod);
+	return (set_endptr(&tod, endptr));
+}
+
+void	print_tod_num(t_strtod *tod)
+{
+	mp_size_t	i = 0;
+
+	printf("size: %ld\n", tod->num.size);
+	while (i < tod->num.size) {
+		printf("%lu", tod->num.limbs[i++]);
+	}
+}
 
 int	main(int argc, char *argv[])
 {
 	double	tmp;
+	char	*ar;
 
 	if (argc == 1)
 		return 1;
-	tmp = ft_strtod(argv[1], NULL);
-	printf("ft\t: %f\n", tmp);
-	tmp = strtod(argv[1], NULL);
-	printf("real\t: %f\n", tmp);
-	printf("argv\t: %s\n", argv[1]);
-	return 0;
+	tmp = ft_strtod(argv[1], &ar);
+	// printf("%f\n", tmp);
+	// printf("%s\n", ar);
 }
-#endif
