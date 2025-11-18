@@ -53,3 +53,7 @@ ft_atof()の方針が定まらず。
 ## 2025/11/17
 `ft_atof/ft_strtod.c`の追加。   
 まだ、修正は必要。   
+
+## 2025/11/18
+`ft_atof/ft_strtod.c`の追加。   
+`sun micro systems`から`glibc`を参考にという方針に変更。   

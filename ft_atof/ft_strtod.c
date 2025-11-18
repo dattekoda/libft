@@ -6,13 +6,95 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:33:17 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/17 00:28:48 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/18 08:56:06 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
+
+#define PASTE(a,b) a ## b
+typedef unsigned long int	mp_limb_t;
+typedef long int			mp_size_t;
+typedef long				int_max_t;
+
+#define BITS_PER_MP_LIMB 64
+
+#define FLT_MIN_EXP 24
+#define FLT_MANT_DIG 53
+
+#define MIN_EXP		PASTE(FLT, _MIN_EXP)
+#define MANT_DIG	PASTE(FLT, _MANT_DIG)
+
+#define howmany(x,y)	(((x)+((y)-1))/(y))
+#define MPNSIZE	(howmany (1 + ((MANT_DIG - MIN_EXP + 2) * 10) / 3, \
+					BITS_PER_MP_LIMB))
+
+#define MPN_VAR(name) mp_limb_t name[MPNSIZE]; mp_size_t name ## size
+
+#define MAX_DIG_PER_LIMB	19
+#define MAX_FAC_PER_LIMB	10000000000000000000UL
+
+#define RETURN_LIMB_SIZE	howmany (MANT_DIG, BITS_PER_MP_LIMB)
+
+const mp_limb_t	_ten_in_limb[MAX_DIG_PER_LIMB + 1] = {
+	0,
+	10,
+	100,
+	1000,
+	10000,
+	100000L,
+	1000000L,
+	10000000L,
+	100000000L,
+	1000000000ULL,
+	10000000000ULL,
+	100000000000ULL,
+	1000000000000ULL,
+	10000000000000ULL,
+	100000000000000ULL,
+	1000000000000000ULL,
+	10000000000000000ULL,
+	100000000000000000ULL,
+	1000000000000000000ULL,
+	10000000000000000000ULL
+};
+
+
+mp_limb_t	num[(((1 + ((53 - (-1021) + 2) * 10) / 3) + ((BITS_PER_MP_LIMB)-1))/(BITS_PER_MP_LIMB)) + 2];
+
+double	ft_strtof(const char *nptr, char **endptr)
+{
+	int			negative;	// The sign of the number.
+	MPN_VAR (num);
+	int_max_t	exponent;
+
+	int			base = 10;
+	MPN_VAR (den);
+	
+	mp_limb_t	retval[RETURN_LIMB_SIZE];
+	int			bits;
+
+	const char	*cp, *tp;
+	const char	*startp, *start_of_digits;
+	const char	*expp;
+	
+	size_t		dig_no, int_no, lead_no;
+	char	c;
+
+	const char	*decimal;
+	size_t		decimal_len;
+
+	const char	*thousands = NULL;
+}
+
+
+#ifndef SUN_MICRO_SYSTEMS
+# define SUN_MICRO_SYSTEMS 0
+#endif
+
+#if SUN_MICRO_SYSTEMS
 #include "libft.h"
 #include <stdio.h>
-
 #ifndef TRUE
 # define TRUE 1
 #endif
@@ -205,3 +287,4 @@ int	main(int argc, char *argv[])
 	printf("argv\t: %s\n", argv[1]);
 	return 0;
 }
+#endif

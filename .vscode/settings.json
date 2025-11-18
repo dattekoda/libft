@@ -3,6 +3,8 @@
 		"libft.h": "c",
 		"cstdlib": "c",
 		"stdlib.h": "c",
-		"atof.h": "c"
+		"atof.h": "c",
+		"__locale": "cpp",
+		"locale": "cpp"
 	}
 }
