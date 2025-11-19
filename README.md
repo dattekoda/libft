@@ -62,3 +62,6 @@ ft_atof()の方針が定まらず。
 
 ## 2025/11/19
 `ft_atof/set_*`追加   
+
+## 2025/11/20
+`ft_atof/ft_strtod_str_to_mpn.c`の追加。`mpn->limbs`に加算を行う関数, 2^n(n > 0)する関数, 10倍する関数を追加。   

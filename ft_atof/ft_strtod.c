@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:33:17 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/19 19:20:55 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/20 06:55:55 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,6 @@ int	set_tod(t_strtod *tod, const char *nptr)
 		return (IS_OVER_FLOW);
 	normalize_exponent(tod);
 	return (NOT_OVER_FLOW);
-}
-
-void	set_ten_in_limb(mp_limb_t *ten_in_limb)
-{
-	const mp_limb_t	_ten_in_limb[MAX_DIG_PER_LIMB + 1] = {
-		1,
-		10,
-		100,
-		1000,
-		10000,
-		100000L,
-		1000000L,
-		10000000L,
-		100000000L,
-		1000000000ULL,
-		10000000000ULL,
-		100000000000ULL,
-		1000000000000ULL,
-		10000000000000ULL,
-		100000000000000ULL,
-		1000000000000000ULL,
-		10000000000000000ULL,
-		100000000000000000ULL,
-		1000000000000000000ULL,
-		10000000000000000000ULL
-	};
-
-	ft_memmove(ten_in_limb, _ten_in_limb, \
-		sizeof(mp_limb_t) * (MAX_DIG_PER_LIMB + 1));
 }
 
 int	_mpn_mul_1(t_mpn *mpn, mp_limb_t limb)
