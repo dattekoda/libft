@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 22:05:02 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/18 22:08:43 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:10:06 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ int	tod_is_valid_num(t_strtod *tod)
 {
 	return (ft_isdigit(*(tod->cp)) \
 		|| (tod->base == 16 && is_hexalpha(*(tod->cp))));
-}
-
-void	skip_sp_set_negative(t_strtod *tod)
-{
-	while (ft_isspace(*(tod->cp)))
-		tod->cp++;
-	if (*(tod->cp) == '-' || *(tod->cp) == '+')
-		tod->negative = (*((tod->cp)++) == '-');
 }
 
 static void	set_negative(t_strtod *tod)

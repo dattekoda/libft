@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:41:50 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/18 21:20:25 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:17:30 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 // # define howmany(x,y)	(((x)+((y)-1))/(y))
 // (howmany (1 + ((MANT_DIG - (MIN_EXP) + 2) * 10) / 3, BITS_PER_MP_LIMB) + 2)
 
-// # define MPN_VAR(name) mp_limb_t name[MPNSIZE]; mp_size_t name ## size
+// # define MPN_VAR(name) mp_limb_t name[MPNSIZE_MAX]; mp_size_t name ## size
 // # define PASTE(a,b) a ## b
 
 # define BITS_PER_MP_LIMB 64
 
-# define MPNSIZE	56 // 3590 / 64
+# define MPNSIZE_MAX	56 // 3590 / 64
 # define MAX_DIG_PER_LIMB	19
 # define MAX_FAC_PER_LIMB	10000000000000000000UL
 
@@ -49,7 +49,7 @@ typedef int64_t		intmax_t;
 
 typedef struct s_mpn
 {
-	mp_limb_t	limbs[MPNSIZE];
+	mp_limb_t	limbs[MPNSIZE_MAX];
 	mp_size_t	size;
 }	t_mpn;
 
