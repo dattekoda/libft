@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 06:55:05 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/20 17:04:10 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:40:58 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	_mpn_mul_10(t_mpn *mpn)
 	return (_mpn_mul_power_2(mpn, 1));
 }
 
-static int	char_to_digit(char c, int base)
+int	char_to_digit(char c, int base)
 {
 	if (base == 10)
 	{

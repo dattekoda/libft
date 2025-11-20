@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 18:09:05 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/19 18:27:12 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:47:57 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	scan_digits(t_strtod *tod)
 	bool	already_point;
 
 	already_point = count_zeros(tod);
+	tod->start_of_digits = tod->cp;
 	while (!already_point && tod_is_valid_num(tod))
 	{
 		(tod->cp)++;
