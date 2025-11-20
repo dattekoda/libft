@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 22:05:39 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/19 18:15:21 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:46:47 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ double	ft_infinity(void);
 double	ft_nan(void);
 bool	is_inf(t_strtod *tod);
 bool	is_nan(t_strtod *tod);
+
+int	str_to_mpn(t_strtod *tod);
 
 #endif

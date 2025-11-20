@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:33:17 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/20 06:55:55 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/20 13:48:38 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,40 +36,15 @@ int	set_tod(t_strtod *tod, const char *nptr)
 	return (NOT_OVER_FLOW);
 }
 
-int	_mpn_mul_1(t_mpn *mpn, mp_limb_t limb)
-{
-	__uint128_t	cy;
-	size_t		i;
-
-	i = 0;
-	cy = 0;
-	while (i < mpn->size)
-	{
-		cy = limb * mpn->limbs[i] + cy;
-		mpn->limbs[i] = 0x0000FFFF & cy;
-		cy = cy >> 64;
-		i++;
-	}
-	if (cy && i < MPNSIZE_MAX)
-	{
-		mpn->limbs[i] = 0x0000FFFF & cy;
-		mpn->size++;
-	}
-	else if (cy)
-		return (IS_OVER_FLOW);
-	return (NOT_OVER_FLOW);
-}
-
-void	_mpn_add_1(t_mpn *mpn, mp_limb_t limb)
-{
-}
-
 double	ft_strtod(const char *nptr, char **endptr)
 {
 	t_strtod	tod;
 
 	if (set_tod(&tod, nptr))
 		return (set_endptr(&tod, endptr));
+	if (str_to_mpn(&tod))
+		return (set_endptr(&tod, endptr));
+	printf("%zu\n", tod.num.limbs[0]);
 	return (set_endptr(&tod, endptr));
 }
 
