@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 15:33:17 by khanadat          #+#    #+#             */
-/*   Updated: 2025/11/20 13:48:38 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/20 17:29:57 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ double	ft_strtod(const char *nptr, char **endptr)
 	return (set_endptr(&tod, endptr));
 }
 
-void	print_tod_num(t_strtod *tod)
+void	print_mpn(t_mpn *mpn)
 {
-	mp_size_t	i = 0;
+	mp_size_t	i = num->size;
 
-	printf("size: %ld\n", tod->num.size);
-	while (i < tod->num.size) {
-		printf("%lu", tod->num.limbs[i++]);
+	printf("size: %ld\n", num->size);
+	while (0 < i) {
+		printf("%lu", num->limbs[--i]);
 	}
 }
 
