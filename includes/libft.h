@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:52:23 by khanadat          #+#    #+#             */
-/*   Updated: 2025/10/12 23:35:16 by khanadat         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:04:50 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+double	ft_strtod(const char *string, char **endPtr);
+double	ft_atof(const char *nptr);
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
