@@ -76,3 +76,4 @@ start_of_digitsが適切なポインタを指すように変更。
 ## 2026/01/08
 ディレクトリ名を'srcs', 'includes'から'src', 'include'へ変更。
 公開ヘッダーファイルで不必要にincludeしないよう修正。
+bonusファイルをいくつか修正。
