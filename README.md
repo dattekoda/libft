@@ -72,3 +72,7 @@ start_of_digitsが適切なポインタを指すように変更。
 `ft_atof`, `ft_strtod()`の追加.   
 `Makefile`の編集.   
 16進数は対応していない。   
+
+## 2026/01/08
+ディレクトリ名を'srcs', 'includes'から'src', 'include'へ変更。
+公開ヘッダーファイルで不必要にincludeしないよう修正。

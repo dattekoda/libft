@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 13:43:06 by khanadat          #+#    #+#             */
-/*   Updated: 2026/01/08 11:20:37 by khanadat         ###   ########.fr       */
+/*   Created: 2025/04/27 12:39:44 by khanadat          #+#    #+#             */
+/*   Updated: 2026/01/08 11:46:11 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
+	int		len;
+	int		i;
+	char	*res;
+
+	len = ft_strlen(s);
+	res = malloc(len + 1);
+	if (!res)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		res[i] = f((unsigned int) i, s[i]);
+	res[len] = '\0';
+	return (res);
 }

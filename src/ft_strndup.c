@@ -1,22 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 13:43:06 by khanadat          #+#    #+#             */
-/*   Updated: 2026/01/08 11:20:37 by khanadat         ###   ########.fr       */
+/*   Created: 2025/07/08 10:58:18 by khanadat          #+#    #+#             */
+/*   Updated: 2026/01/08 11:46:27 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+char	*ft_strndup(const char *s, size_t n)
 {
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
+	char	*ndup;
+	size_t	s_len;
+
+	s_len = ft_strlen(s);
+	if (s_len < n)
+		n = s_len;
+	ndup = malloc(n + 1);
+	if (!ndup)
+		return (NULL);
+	ft_memmove(ndup, s, n);
+	ndup[n] = '\0';
+	return (ndup);
 }
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	s[11] = "hel\nloworld";
+// 	char	*t;
+
+// 	t = ft_strndup(s, 4);
+// 	printf("%s", t);
+// 	return (free(t), 0);
+// }

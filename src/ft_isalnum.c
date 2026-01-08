@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 13:43:06 by khanadat          #+#    #+#             */
+/*   Created: 2025/04/25 10:42:02 by khanadat          #+#    #+#             */
 /*   Updated: 2026/01/08 11:20:37 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+int	ft_isalnum(int c)
 {
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
+	if (ft_isdigit(c) || ft_isalpha(c))
+		return (8);
+	return (0);
 }
+
+/*
+int	main(void)
+{
+	if (isalnum('a'))
+	{
+		printf("1\n");
+	}
+	else
+	{
+		printf("0\n");
+	}
+	return (0);
+}
+*/

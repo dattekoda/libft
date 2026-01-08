@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 10:56:23 by khanadat          #+#    #+#             */
-/*   Updated: 2026/01/08 11:20:37 by khanadat         ###   ########.fr       */
+/*   Created: 2025/04/27 03:11:06 by khanadat          #+#    #+#             */
+/*   Updated: 2026/01/08 11:48:07 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	if (*lst == NULL)
-		*lst = new;
+	size_t	copy_len;
+	size_t	s_len;
+	char	*sub;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	if (len < s_len - start)
+		copy_len = len;
 	else
-		ft_lstlast(*lst)->next = new;
+		copy_len = s_len - start;
+	sub = malloc(copy_len + 1);
+	if (!sub)
+		return (NULL);
+	ft_memmove(sub, s + start, copy_len);
+	sub[copy_len] = '\0';
+	return (sub);
 }

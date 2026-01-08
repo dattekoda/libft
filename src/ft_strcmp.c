@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 13:43:06 by khanadat          #+#    #+#             */
-/*   Updated: 2026/01/08 11:20:37 by khanadat         ###   ########.fr       */
+/*   Created: 2025/06/21 04:19:21 by khanadat          #+#    #+#             */
+/*   Updated: 2026/01/08 11:45:49 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdint.h>
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
+	return (ft_strncmp(s1, s2, SIZE_MAX));
 }
