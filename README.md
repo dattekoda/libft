@@ -77,3 +77,7 @@ start_of_digitsが適切なポインタを指すように変更。
 ディレクトリ名を'srcs', 'includes'から'src', 'include'へ変更。
 公開ヘッダーファイルで不必要にincludeしないよう修正。
 bonusファイルをいくつか修正。
+
+## 2026/3/15
+`get_next_line`
+move to macros like GNL_* from gnl.h to libft.h
