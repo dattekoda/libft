@@ -81,3 +81,7 @@ bonusファイルをいくつか修正。
 ## 2026/3/15
 `get_next_line`
 move to macros like GNL_* from gnl.h to libft.h
+
+## 2026/3/24
+`ft_get_next_line`
+fix: get_next_line can free static char *store
