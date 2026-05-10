@@ -1,4 +1,6 @@
 .vscode
 *.o
 *.a
+*.idx
+compile_commands.json
 a.out

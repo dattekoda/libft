@@ -6,7 +6,7 @@
 /*   By: khanadat <khanadat@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 12:52:23 by khanadat          #+#    #+#             */
-/*   Updated: 2026/03/24 18:04:47 by khanadat         ###   ########.fr       */
+/*   Updated: 2026/05/10 19:18:14 by khanadat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@
 
 # define STORE_FREE_FD	-7
 
-# define GNL_ERR_INVALID -3
-# define GNL_ERR_MALLOC -2
-# define GNL_ERR_READ -1
+# define GNL_ERR -1
 # define GNL_EOF 0
 # define GNL_LINE 1
 
@@ -94,11 +92,9 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-// set line including '\n'
-// if get line successfully return 1
-// if eof return 0
-// read error -1 malloc error -2
-// invalid input -3
+// got line return 1
+// EOF return 0
+// error return -1
 int		ft_get_next_line(int fd, char **line);
 
 #endif

@@ -85,3 +85,7 @@ move to macros like GNL_* from gnl.h to libft.h
 ## 2026/3/24
 `ft_get_next_line`
 fix: get_next_line can free static char *store
+
+## 2026/5/10
+`ft_get_next_line`
+refactor: improve readability
